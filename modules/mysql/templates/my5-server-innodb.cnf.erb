@@ -1,0 +1,14 @@
+
+# InnoDB Settings
+
+innodb_buffer_pool_size         = <%= __innodb_buffer_pool_size %>
+innodb_additional_mem_pool_size = <%= __innodb_additional_mem_pool_size %>
+innodb_data_home_dir            = /var/lib/mysql/
+innodb_data_file_path           = hyves_innodb:50M:autoextend
+innodb_log_file_size            = <%= __innodb_log_file_size %>
+innodb_log_buffer_size          = <%= __innodb_log_buffer_size %>
+innodb_log_files_in_group       = 2
+innodb_log_group_home_dir       = <%= __innodb_log_group_home_dir %>
+innodb_flush_log_at_trx_commit  = <%= __innodb_flush_log_at_trx_commit %>
+innodb_lock_wait_timeout        = <%= __innodb_lock_wait_timeout %>
+innodb_file_per_table           = <%= __innodb_file_per_table %>

@@ -1,0 +1,74 @@
+#Base mysql configs for mysql 5.1
+#This file only contains architecture unspecific stuff
+
+[mysqld]
+
+language                        = /usr/share/mysql/english
+
+character_set_server            = latin1
+character_set_client            = latin1
+default_character_set           = latin1
+collation_server                = latin1_swedish_ci
+
+user                            = mysql
+port                            = <%= __base_port %>
+socket                          = /var/run/mysqld/mysqld.sock
+pid-file                        = /var/run/mysqld/mysqld.pid
+log-error                       = /var/log/mysql/mysqld.err
+
+basedir                         = /usr
+datadir                         = /var/lib/mysql
+tmpdir                          = <%= __base_tmpdir %>
+slave_load_tmpdir               = <%= __base_slave_load_tmpdir %>
+
+relay-log                       = <%= __relay_log %>
+relay-log-index                 = <%= __relay_log_index %>
+relay-log-info-file             = <%= __relay_log_info_file %>
+relay-log-space-limit           = <%= __relay_log_space_limit %>
+max-relay-log-size              = <%= __max_relay_log_size %> 
+master-info-file                = <%= __master_info_file %> 
+
+log_output                      = FILE
+general_log                     = 0
+slow_query_log                  = <%= __slow_query_log %>
+#slow_query_log_file             = /var/log/mysql/mysql-slowlog.fifo  #5.1.22 doesn't know this parameter
+long_query_time                 = 0.0
+log-queries-not-using-indexes
+
+wait_timeout                    = <%= __base_wait_timeout %>
+connect_timeout                 = <%= __base_connect_timeout %>
+interactive_timeout             = <%= __base_interactive_timeout %>
+back_log                        = <%= __base_back_log %>
+open_files_limit                = <%= __base_open_files_limit %>
+
+skip-locking
+skip_name_resolve
+slave-skip-errors               = <%= __base_slave_skip_errors %>
+low_priority_updates            = <%= __base_low_priority_updates %>
+
+max_allowed_packet              = 1G
+table_cache                     = <%= __base_table_cache %>
+table_definition_cache          = <%= __base_table_definition_cache %>
+sort_buffer_size                = <%= __base_sort_buffer_size %>
+net_buffer_length               = <%= __base_net_buffer_length %>
+read_buffer_size                = <%= __base_read_buffer_size %>
+read_rnd_buffer_size            = <%= __base_read_rnd_buffer_size %>
+max_connections                 = <%= __base_max_connections %>
+
+thread_stack                    = <%= __base_thread_stack %>
+thread_cache                    = <%= __base_thread_cache %>
+
+query_cache_size                = <%= __base_query_cache_size %>
+tmp_table_size                  = <%= __base_tmp_table_size %>
+max_heap_table_size             = <%= __base_max_heap_table_size %>
+
+default-storage-engine          = <%= __base_default_storage_engine %>
+
+
+<% __replication_replicate_ignore_table.each do |table| -%>
+replicate-ignore-table          = <%= table %>
+<% end -%>
+
+<% __replication_replicate_do_table.each do |table| -%>
+replicate-do-table = <%= table %>
+<% end -%>

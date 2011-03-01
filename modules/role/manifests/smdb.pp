@@ -10,4 +10,5 @@ class role::smdb inherits role
             category => "dev-python",
             ensure => latest;
     }
+    include mysql
 }
