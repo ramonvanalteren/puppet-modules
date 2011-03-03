@@ -15,6 +15,9 @@ class role::tracker inherits role
         "redis":
             category => "dev-db",
             ensure => latest;
+        "mktorrent":
+            category => "net-p2p",
+            ensure => latest;
     }
 
     service {

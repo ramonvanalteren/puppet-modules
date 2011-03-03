@@ -15,7 +15,8 @@ class portage::sync {
         cwd => "/root",
         unless => "/bin/bash -c '[[ $(date +%s)-$(stat -c %Y /var/cache/eix) -lt 86400 ]]'",
         require => [
-            Exec["sync-tree"]
+            Exec["sync-tree"],
+            Class["portage::overlay"]
         ]
     }
 }
@@ -56,14 +57,20 @@ class portage::config {
 }
 
 class portage::overlay {
-    exec { "install_overlay":
-        command => "/usr/bin/git clone git://sourcy.internal/portage",
-        cwd => "/usr/local",
-        unless => "/usr/bin/test -d /usr/local/portage/.git",
-        require => [
-            Class["portage::config"],
-            Class["portage::sync"]#,
-            ]
+    exec {
+        "install_overlay":
+            command => "/usr/bin/git clone git://sourcy.internal/portage",
+            cwd => "/usr/local",
+            unless => "/usr/bin/test -d /usr/local/portage/.git",
+            require => [
+                Class["portage::config"],
+                ];
+        "update_overlay":
+            command => "/usr/bin/git pull",
+            cwd => "/usr/local/portage",
+            require => [
+                Exec["install_overlay"]
+                ];
     }
 }
 
