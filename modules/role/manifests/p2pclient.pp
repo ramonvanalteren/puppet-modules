@@ -10,4 +10,16 @@ class role::p2pclient inherits role
             category => "dev-python",
             ensure => latest;
     }
+
+    service {
+        "rtorrentd":
+            enable => true,
+            ensure => running,
+            hasrestart => true,
+            hasstatus => true,
+            require => [
+                Package["rtorrent"]
+                ];
+        }
+
 }

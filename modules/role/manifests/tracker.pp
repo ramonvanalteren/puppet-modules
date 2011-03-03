@@ -17,13 +17,23 @@ class role::tracker inherits role
             ensure => latest;
     }
 
-    service { "redis":
-        enable => true,
-        ensure => running,
-        hasrestart => true,
-        hasstatus => true,
-        require => [
-            Package["redis"]
-            ]
+    service {
+        "redis":
+            enable => true,
+            ensure => running,
+            hasrestart => true,
+            hasstatus => true,
+            require => [
+                Package["redis"]
+                ];
+        "rtorrentd":
+            enable => true,
+            ensure => running,
+            hasrestart => true,
+            hasstatus => true,
+            require => [
+                Package["rtorrent"]
+                ];
         }
+
 }
