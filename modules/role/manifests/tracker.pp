@@ -12,5 +12,18 @@ class role::tracker inherits role
         "redis-py":
             category => "dev-python",
             ensure => latest;
+        "redis":
+            category => "dev-db",
+            ensure => latest;
     }
+
+    service { "redis":
+        enable => true,
+        ensure => running,
+        hasrestart => true,
+        hasstatus => true,
+        require => [
+            Package["redis"]
+            ]
+        }
 }
