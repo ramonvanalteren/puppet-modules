@@ -18,9 +18,11 @@ class rtorrent
             ];
     }
 
-    file { "configfile":
-        name => "/root/.rtorrent.rc",
-        ensure => present,
-        content => template("rtorrent.erb"),
+    file { 
+        "configfile":
+            name => "/root/.rtorrent.rc",
+            ensure => present,
+            content => template("rtorrent/rtorrent.erb"),
+            notify => Service["rtorrentd"],
     }
 }
