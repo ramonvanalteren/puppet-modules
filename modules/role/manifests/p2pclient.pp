@@ -2,24 +2,11 @@
 
 class role::p2pclient inherits role
 {
+
+    include rtorrent
     package {
-        "rtorrent":
-            category => "net-p2p",
-            ensure => present;
         "redis-py":
             category => "dev-python",
             ensure => latest;
     }
-
-    service {
-        "rtorrentd":
-            enable => true,
-            ensure => running,
-            hasrestart => true,
-            hasstatus => true,
-            require => [
-                Package["rtorrent"]
-                ];
-        }
-
 }

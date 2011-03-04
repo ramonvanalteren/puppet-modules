@@ -3,9 +3,6 @@
 class role::tracker inherits role
 {
     package {
-        "rtorrent":
-            category => "net-p2p",
-            ensure => present;
         "flask":
             category => "dev-python",
             ensure => latest;
@@ -29,14 +26,6 @@ class role::tracker inherits role
             require => [
                 Package["redis"]
                 ];
-        "rtorrentd":
-            enable => true,
-            ensure => running,
-            hasrestart => true,
-            hasstatus => true,
-            require => [
-                Package["rtorrent"]
-                ];
         }
-
+    include rtorrent
 }
