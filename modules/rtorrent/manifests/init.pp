@@ -1,5 +1,7 @@
 class rtorrent
 {
+
+    $__rtorrent_port = 5002
     package {
         "rtorrent":
             category => "net-p2p",
@@ -18,7 +20,7 @@ class rtorrent
             ];
     }
 
-    file { 
+    file {
         "configfile":
             name => "/root/.rtorrent.rc",
             ensure => present,
