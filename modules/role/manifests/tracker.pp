@@ -19,6 +19,14 @@ class role::tracker inherits role
 
     service {
         "redis":
+            enable => false,
+            ensure => stopped,
+            hasrestart => true,
+            hasstatus => true,
+            require => [
+                Package["redis"]
+                ];
+        "redis2":
             enable => true,
             ensure => running,
             hasrestart => true,
