@@ -47,15 +47,15 @@ class mysql
    }
 
    file { "/etc/mysql/my5-client.cnf":
-       source => "mysql/my5-client.cnf"
+       source => "modules/mysql/my5-client.cnf"
    }
 
    file { "/etc/mysql/my.cnf":
-       source => "mysql/my.cnf"
+       source => "modules/mysql/my.cnf"
    }
 
    file { "/etc/mysql/my5-tools.cnf":
-        source => "mysql/my5-tools.cnf"
+        source => "modules/mysql/my5-tools.cnf"
    }
 
 
