@@ -81,4 +81,4 @@ class portage {
     include portage::config, portage::sync, portage::overlay
 }
 
-class { "portage": stage => bootstrap }
+class { "portage": stage => bootstrap } -> Class["hostname"]
