@@ -13,7 +13,7 @@ class portage::sync {
     exec { "eix-update":
         command => "/usr/bin/eix-update",
         cwd => "/root",
-        unless => "/bin/bash -c '[[ $(date +%s)-$(stat -c %Y /var/cache/eix) -lt 86400 ]]'",
+        unless => "/bin/bash -c '[[ $(date +%s)-$(stat -c %Y /var/cache/eix) -lt $(grep 'Sync completed' /var/log/emerge.log | tail -n1 | cut -f1 -d:) ]]'",
         require => [
             Exec["sync-tree"],
             Class["portage::overlay"]
