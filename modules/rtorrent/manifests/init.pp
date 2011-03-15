@@ -5,7 +5,8 @@ class rtorrent
     package {
         "rtorrent":
             category => "net-p2p",
-            ensure => latest;
+            ensure => latest,
+	    ;
     }
 
     service {
@@ -17,7 +18,8 @@ class rtorrent
             require => [
                 Package["rtorrent"],
                 File["configfile"]
-            ];
+            	],
+	    ;
     }
 
     file {

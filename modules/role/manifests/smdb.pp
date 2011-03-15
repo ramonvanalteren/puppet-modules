@@ -2,15 +2,17 @@
 
 class role::smdb inherits role
 {
+    notify { "Installing packages: flask & sqlalchemy": ; }
+
     package {
         "flask":
             category => "dev-python",
             ensure => latest,
-            notify => "Installing $name";
+            ;
         "sqlalchemy":
             category => "dev-python",
             ensure => latest,
-            notify => "Installing $name";
+            ;
     }
     include mysql
 }
