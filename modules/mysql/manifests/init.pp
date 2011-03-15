@@ -4,7 +4,7 @@ class mysql
 {
     tag("mysql")
 
-    class { "mysql::install": stage => bootstrap }
+    class { "mysql::install": stage => bootstrap } -> Class["portage"]
     class { "mysql::config": stage=> main }
 
     service { "mysql":
