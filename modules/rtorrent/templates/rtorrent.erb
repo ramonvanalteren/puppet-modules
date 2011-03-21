@@ -18,8 +18,8 @@ max_uploads = 3000
 # This means that any throttle you define can not exceed the values here.
 #
 # Set a max of 500 mbit
-download_rate = 50m
-upload_rate = 50m
+download_rate = 4096k
+upload_rate = 4096k
 
 # up&down throttles 
 # rtorrent has a weirdness that it internally multiplies with 1024
@@ -30,19 +30,19 @@ upload_rate = 50m
 
 # default group for peers outside of my rack
 # Initializing this throttle to 1mbit per peer !!!!
-throttle_up = outside, 1k
-throttle_down = outside, 1k
+# throttle_up = outside, 1k
+# throttle_down = outside, 1k
 
 # default group for peers inside of my rack
 # Initializing this thrlottle to 50 mbit per peer !!!
-throttle_up = inside, 50k
-throttle_down = inside, 50k
+# throttle_up = inside, 50k
+# throttle_down = inside, 50k
 
 # Default group, anyone should automagically fall into this group
 # Setting this to 512 kbit per peer ! and assigning any ipaddress to the
 # default group
-throttle_up = default, 512
-throttle_down = default, 512
+throttle_up = default, 4096k
+throttle_down = default, 4096k
 throttle_ip = default, 10.0.0.0/8
 
 # This will be overriden by per-transfer settings anyway, so for start some safe default:
