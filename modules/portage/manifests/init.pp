@@ -59,7 +59,7 @@ class portage::config {
 class portage::overlay {
     exec {
         "install_overlay":
-            command => "/usr/bin/git clone git://source.hyves.org/ramon-portage",
+            command => "/usr/bin/git clone git://source.hyves.org/ramon-portage portage",
             cwd => "/usr/local",
             unless => "/usr/bin/test -d /usr/local/portage/.git",
             require => [
