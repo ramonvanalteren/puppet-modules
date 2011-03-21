@@ -1,11 +1,21 @@
-class hostname {
+class { "hostname": stage => "bootstrap" } 
 
-	$myhostname="vagrant-default"
+class hostname {
+	class { "hostname::setup": stage => "bootstrap" }
+	include hostname::setup
+}
+
+class hostname::setup {
+
+	$thishostname = $myhostname ? {
+		default => "vagrant-default"
+		}
+
 	file { 
 		"/etc/conf.d/hostname":
 			content => template("hostname/hostname.confd.erb"),
 			ensure => present,
-			notify => Service["hostname"],
+			notify => Exec["hostname-refresh"],
 			require => File["/etc/hosts"],
 			;
 		"/etc/hosts":
@@ -14,9 +24,12 @@ class hostname {
 			;
 	}
 
-	service { "hostname":
-		ensure => running,
+	exec { "hostname-refresh":
+		command => "/bin/bash -c '/etc/init.d/hostname restart'",
+		require => [
+			File["/etc/conf.d/hostname"],
+			File["/etc/hosts"]
+		],
 	}
 }
 
-class { "hostname": stage => "bootstrap" } 
