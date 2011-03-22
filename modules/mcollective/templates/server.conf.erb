@@ -1,0 +1,19 @@
+topicprefix = /topic/
+libdir = /usr/share/mcollective/plugins
+logfile = /var/log/mcollective-server.log
+loglevel = info
+daemonize = 1
+
+# Plugins
+securityprovider = psk
+plugin.psk = thisisagreatnewproductonceagain
+
+connector = stomp
+plugin.stomp.host = 192.168.135.11
+plugin.stomp.port = 6163
+plugin.stomp.user = mcollective
+plugin.stomp.password = marionette
+
+# Facts
+factsource = yaml
+plugin.yaml = /etc/mcollective/facts.yaml
