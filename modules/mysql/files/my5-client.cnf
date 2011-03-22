@@ -1,7 +1,3 @@
-# MySQL settings for mysql 5.1 clientlib
-# 2007-11-13, Roald
-
-
 [client]
 port                            = 3306
 socket                          = /var/run/mysqld/mysqld.sock

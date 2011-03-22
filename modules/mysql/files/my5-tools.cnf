@@ -1,7 +1,3 @@
-# MySQL settings for mysql 5.1 tools and utilities
-# 2007-11-13, Roald
-
-
 [mysql]
 character-sets-dir              = /usr/share/mysql/charsets
 default-character-set           = latin1
