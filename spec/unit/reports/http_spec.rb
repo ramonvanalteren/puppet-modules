@@ -37,6 +37,11 @@ describe processor do
       subject.process
     end
 
+#    it "should use the timeout specified by the reporturl_timeout setting" do
+#        http.expects(:request).with {|req|
+
+
+
     it "should give the body as the report as YAML" do
       http.expects(:request).with {|req|
         req.body.should == subject.to_yaml
