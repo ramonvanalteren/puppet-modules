@@ -2,7 +2,7 @@ require 'puppet'
 require 'puppet/network/http_pool'
 require 'uri'
 
-Puppet::Reports.register_report(:http) do
+Puppet::Reports.register_report(:http_timeout) do
 
   desc <<-DESC
   Send report information via HTTP to the `reporturl`. Each host sends
@@ -12,7 +12,7 @@ Puppet::Reports.register_report(:http) do
 
   def process
     url = URI.parse(Puppet[:reporturl])
-    timeout = Puppet[:reporturl_timeout]
+    timeout = 5
     req = Net::HTTP::Post.new(url.path)
     req.body = self.to_yaml
     req.content_type = "application/x-yaml"
@@ -30,7 +30,7 @@ Puppet::Reports.register_report(:http) do
     }
   rescue Timeout::Error
       Puppet.err "Timeout when submitting report to #{Puppet[:reporturl].to_s}"
-  ensure
+  ensure 
     conn.read_timeout = orig_read_timeout
     conn.open_timeout = orig_open_timeout
   end
